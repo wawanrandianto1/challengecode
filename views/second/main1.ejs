@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENT</title>
+  <%- include('../partials/css'); -%>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <pre class="code-example">
+        Mengambil waktu jeda dari event yang paling ter-lama.
+        09:00AM - 10:30AM (event1)
+        11:00AM - 12:30PM (event2)
+        01:30PM - 03:00PM (event3)
+        
+        jarak jeda antara event1 dan event2 adalah 00:30
+        sedangkan jarak jeda antara event2 dan event3 adalah 01:00
+        maka output yang benar adalah 01:00 (waktu paling lama)
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input style="width: 50%;" type="text" name="str" placeholder="masukkan input array time" value="11:00AM - 12:30PM,09:00AM - 10:30AM,01:30PM - 03:00PM">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
+      
+      <% if (result) { %>
+        <pre>
+          <% for(var i=0; i < tmpJarak.length; i++) { %>
+            jarak ke-<%= i+1 %>: <%= tmpJarak[i].formatSelisih %>
+          <% } %>
+          Jeda waktu paling lama adalah : <%= result %>
+        </pre>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

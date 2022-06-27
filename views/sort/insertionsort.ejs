@@ -5,29 +5,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SORT</title>
+  <%- include('../partials/css'); -%>
 </head>
 <body>
-  <div>
-    <p>Sorting array integer metode <b>"Insertion Sort"</b></p>
-    <img src="/public/images/Insertion-sort.gif" alt="">
-    <br>
-    <br>
-    
-    <%- include('../flashmessage'); -%>
-    <br>
-    
-    <form action="" method="post">
-      <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
-      <button type="submit">Apply</button>
-    </form>
-    
-    <br>
-    <br>
-    <% if (result.length) { %>
-      <p>Hasil : <%= result %></p>
-    <% } %>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <br>
+      <p style="margin-bottom: 0;">Sorting array integer metode <b>"Insertion Sort"</b></p>
+      <img src="/public/images/Insertion-sort.gif" alt="">
+      <br>
+      <div style="margin-top: 0;">
+        Algoritma insertion sort pada dasarnya memilah data yang akan diurutkan menjadi dua bagian, yang belum diurutkan dan yang sudah diurutkan.<br>
+        Elemen pertama diambil dari bagian array yang belum diurutkan dan kemudian diletakkan sesuai posisinya pada bagian lain dari array yang telah diurutkan.<br>
+        Langkah ini dilakukan secara berulang hingga tidak ada lagi elemen yang tersisa pada bagian array yang belum diurutkan.
+      </div>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
       
-    
+      <% if (result.length) { %>
+        <pre>Hasil : <%= result %></pre>
+      <% } %>
+    </div>
   </div>
 </body>
 </html>

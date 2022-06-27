@@ -5,29 +5,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SORT</title>
+  <%- include('../partials/css'); -%>
 </head>
 <body>
-  <div>
-    <p>Sorting array integer metode <b>"HEAP Sort"</b></p>
-    <img src="/public/images/Heapsort.gif" alt="">
-    <br>
-    <br>
-    
-    <%- include('../flashmessage'); -%>
-    <br>
-    
-    <form action="" method="post">
-      <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
-      <button type="submit">Apply</button>
-    </form>
-    
-    <br>
-    <br>
-    <% if (result.length) { %>
-      <p>Hasil : <%= result %></p>
-    <% } %>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <br>
+      <p style="margin-bottom: 0;">Sorting array integer metode <b>"HEAP Sort"</b></p>
+      <img src="/public/images/Heapsort.gif" alt="">
+      <br>
+      <p style="margin-top: 0;">
+        Heap sort adalah sorting yang menggunakan struktur data heap, 
+        dengan nilai parent selalu lebih besar dari pada nilai childnya.
+      </p>
+      <pre style="margin: 0;">
+        Algoritma :
+        - Buat suatu heap.
+        - Ambil isi dari root masukkan kedalam sebuah array.
+        - Hapus element root dengan mempertahankan properti heap.
+        - Ulangi sampai tree menjadi kosong
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
       
-    
+      <% if (result.length) { %>
+        <pre>Hasil : <%= result %></pre>
+      <% } %>
+    </div>
   </div>
 </body>
 </html>

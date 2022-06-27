@@ -6,11 +6,14 @@ const FirstController = require('../controller/FirstController');
 const SecondController = require('../controller/SecondController');
 const SortController = require('../controller/SortController');
 
+router.get('/', FirstController.homePage);
 router.get('/runlen-encode', FirstController.encodePage);
 router.post('/runlen-encode', FirstController.encodeProses);
-
 router.get('/runlen-decode', FirstController.decodePage);
 router.post('/runlen-decode', FirstController.decodeProses);
+
+router.get('/eventproblem', SecondController.eventproblemPage);
+router.post('/eventproblem', SecondController.eventproblemProses);
 
 router.get('/bubblesort', SortController.bubblesortPage);
 router.post('/bubblesort', SortController.bubblesortProses);

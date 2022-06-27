@@ -5,29 +5,40 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SORT</title>
+  <%- include('../partials/css'); -%>
 </head>
 <body>
-  <div>
-    <p>Sorting array integer metode <b>"QUICK Sort"</b></p>
-    <img src="/public/images/Quicksort.gif" alt="">
-    <br>
-    <br>
-    
-    <%- include('../flashmessage'); -%>
-    <br>
-    
-    <form action="" method="post">
-      <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
-      <button type="submit">Apply</button>
-    </form>
-    
-    <br>
-    <br>
-    <% if (result.length) { %>
-      <p>Hasil : <%= result %></p>
-    <% } %>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <br>
+      <p style="margin-bottom: 0;">Sorting array integer metode <b>"Quick Sort"</b></p>
+      <img src="/public/images/Quicksort.gif" alt="">
+      <br>
+      <div style="margin-top: 0;">
+        Algoritma ini berdasar pada pola divide-and-conquer. Berbeda dengan merge sort, algoritma ini hanya mengikuti langkah - langkah sebagai berikut :<br>
+        <br>
+        - Divide<br>
+        Memilah rangkaian data menjadi dua sub-rangkaian A[p…q-1] dan A[q+1…r] dimana setiap elemen A[p…q-1] adalah kurang dari atau sama 
+        dengan A[q] dan setiap elemen pada A[q+1…r] adalah lebih besar atau sama dengan elemen pada A[q]. <br>
+        A[q] disebut sebagai elemen pivot. Perhitungan pada elemen q merupakan salah satu bagian dari prosedur pemisahan.<br>
+        <br>
+        - Conquer<br>
+        Mengurutkan elemen pada sub-rangkaian secara rekursif. 
+        Pada algoritma quicksort, langkah ”kombinasi” tidak di lakukan karena telah terjadi pengurutan elemen - elemen pada sub-array.
+      </div>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="input array" value="[6,4,2,1,3,5]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
       
-    
+      <% if (result.length) { %>
+        <pre>Hasil : <%= result %></pre>
+      <% } %>
+    </div>
   </div>
 </body>
 </html>

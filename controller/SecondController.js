@@ -1,64 +1,97 @@
 const Joi = require('joi');
+const moment = require('moment');
 
-const encodePage = (req, res) => {
-  return res.render('first/main1', { result: '' });
+const eventproblemPage = (req, res) => {
+  return res.render('second/main1', { result: '' });
 };
 
-const encodeProses = (req, res) => {
+const eventproblemProses = (req, res) => {
   let result = '';
   const checkObj = { str: Joi.string().required() };
   const checkInput = Joi.object(checkObj).validate(req.body);
   if (checkInput.error) {
     req.flash('error', 'Input kosong');
-    return res.render('first/main1', { result });
+    return res.render('second/main1', { result });
   }
 
+  // new Date(year, month, day, hours, minutes, seconds, milliseconds)
   const { str } = req.body;
-  // logic
-  // result = str.replace(/([ \w])\1+/g, (group, chr) => group.length + chr); // versi singkat
-
-  let count = 0;
-  for (let i = 0; i < str.length; i++) {
-    count = 1;
-    while (i + 1 < str.length && str.charAt(i) == str.charAt(i + 1)) {
-      count++;
-      i++;
+  let arrMentah;
+  try {
+    arrMentah = str.split(',');
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('second/main1', { result });
     }
-    result += str.charAt(i) + count;
-  }
-  return res.render('first/main1', { result });
-};
-
-const decodePage = (req, res) => {
-  return res.render('first/main2', { result: '' });
-};
-
-const decodeProses = (req, res) => {
-  let result = '';
-  const checkObj = { str: Joi.string().required() };
-  const checkInput = Joi.object(checkObj).validate(req.body);
-  if (checkInput.error) {
-    req.flash('error', 'Input kosong');
-    return res.render('first/main1', { result });
+  } catch (error) {
+    req.flash('error', 'Input format salah');
+    return res.render('second/main1', { result });
   }
 
-  const { str } = req.body;
-
+  let today = moment().format('DD-MM-YYYY');
   let tmpArr = [];
-  for (let i = 0; i < str.length - 1; i = i + 2) {
-    let char = str.charAt(i);
-    let count = str.charAt(i + 1) - '0';
-    for (let j = 0; j < count; j++) {
-      tmpArr.push(char);
+  // convert to date time
+  for (let i = 0; i < arrMentah.length; i++) {
+    const time2 = arrMentah[i];
+    const arrtime = time2.split(' - ');
+    let startTime = moment(today + ' ' + arrtime[0], 'DD-MM-YYYY hh:mmA');
+    let endTime = moment(today + ' ' + arrtime[1], 'DD-MM-YYYY hh:mmA');
+    tmpArr.push({
+      start: startTime,
+      end: endTime,
+    });
+  }
+
+  // sorting (bubble sort)
+  for (let i = 0; i < tmpArr.length; i++) {
+    for (let j = tmpArr.length - 1; j > i; j--) {
+      let startNow = tmpArr[j]['start'];
+      let startAfter = tmpArr[j - 1]['start'];
+      if (startNow.isBefore(startAfter)) {
+        let tmpData = tmpArr[j];
+        tmpArr[j] = tmpArr[j - 1];
+        tmpArr[j - 1] = tmpData;
+      }
     }
   }
-  result = tmpArr.join('');
-  return res.render('first/main2', { result });
+
+  // debug purpose
+  // for (let i = 0; i < tmpArr.length; i++) {
+  //   const el = tmpArr[i];
+  //   console.log(el.start.format('DD-MM-YYYY hh:mmA'));
+  //   console.log(el.start.format('hh:mmA'));
+  //   console.log(el.end.format('DD-MM-YYYY hh:mmA'));
+  //   console.log(el.end.format('hh:mmA'));
+  // }
+
+  // new Date(diff * 1000).toISOString().slice(11, 16);
+  // find jarak
+  let maxTime = -999999;
+  let getIndex = 0;
+  let tmpJarak = [];
+  for (let i = 0; i < tmpArr.length; i++) {
+    const mainData = tmpArr[i];
+    let indexing = i + 1;
+    if (indexing < tmpArr.length) {
+      const secondData = tmpArr[indexing];
+      const selisih = secondData.start.diff(mainData.end, 'second');
+      const formatSelisih = new Date(selisih * 1000).toISOString().slice(11, 16);
+      tmpJarak.push({
+        selisih,
+        formatSelisih,
+      });
+      if (maxTime < selisih) {
+        maxTime = selisih;
+        getIndex = i;
+      }
+    }
+  }
+
+  result = tmpJarak[getIndex].formatSelisih;
+  return res.render('second/main1', { result, maxTime, tmpJarak });
 };
 
 module.exports = {
-  encodePage,
-  encodeProses,
-  decodePage,
-  decodeProses,
+  eventproblemPage,
+  eventproblemProses,
 };

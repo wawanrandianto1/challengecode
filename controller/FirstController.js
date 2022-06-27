@@ -1,5 +1,9 @@
 const Joi = require('joi');
 
+const homePage = (req, res) => {
+  return res.render('welcome');
+};
+
 const encodePage = (req, res) => {
   return res.render('first/main1', { result: '' });
 };
@@ -61,4 +65,5 @@ module.exports = {
   encodeProses,
   decodePage,
   decodeProses,
+  homePage,
 };

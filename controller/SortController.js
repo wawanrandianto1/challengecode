@@ -32,7 +32,17 @@ const bubblesortProses = (req, res) => {
   }
 
   const { str } = req.body;
-  let arrMentah = JSON.parse(str);
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/bubblesort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/bubblesort', { result });
+  }
 
   // loop array start dari index 0
   for (let i = 0; i < arrMentah.length; i++) {
@@ -62,7 +72,17 @@ const insertionsortProses = (req, res) => {
   }
 
   const { str } = req.body;
-  let arrMentah = JSON.parse(str);
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/insertionsort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/insertionsort', { result });
+  }
 
   // loop array start dari index 0
   for (let i = 0; i < arrMentah.length; i++) {
@@ -92,7 +112,17 @@ const selectionsortProses = (req, res) => {
   }
 
   const { str } = req.body;
-  let arrMentah = JSON.parse(str);
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/selectionsort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/selectionsort', { result });
+  }
 
   // loop array start dari index 0
   for (let i = 0; i < arrMentah.length; i++) {
@@ -124,7 +154,18 @@ const shellsortProses = (req, res) => {
   }
 
   const { str } = req.body;
-  let arrMentah = JSON.parse(str);
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/shellsort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/shellsort', { result });
+  }
+
   let gap = parseInt(arrMentah.length / 2, 10);
   while (gap > 0) {
     for (let i = gap; i < arrMentah.length; i++) {
@@ -177,11 +218,22 @@ const mergesortProses = (req, res) => {
   const checkInput = Joi.object(checkObj).validate(req.body);
   if (checkInput.error) {
     req.flash('error', 'Input kosong');
-    return res.render('sort/shellsort', { result });
+    return res.render('sort/mergesort', { result });
   }
 
   const { str } = req.body;
-  let arrMentahInput = JSON.parse(str);
+  let arrMentahInput;
+  try {
+    arrMentahInput = JSON.parse(str);
+    if (!Array.isArray(arrMentahInput)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/mergesort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/mergesort', { result });
+  }
+
   let arrMentah = mergesortFunc(arrMentahInput);
   result = '[' + arrMentah.join(',') + ']';
   return res.render('sort/mergesort', { result });
@@ -211,11 +263,22 @@ const quicksortProses = (req, res) => {
   const checkInput = Joi.object(checkObj).validate(req.body);
   if (checkInput.error) {
     req.flash('error', 'Input kosong');
-    return res.render('sort/shellsort', { result });
+    return res.render('sort/quicksort', { result });
   }
 
   const { str } = req.body;
-  let arrMentahInput = JSON.parse(str);
+  let arrMentahInput;
+  try {
+    arrMentahInput = JSON.parse(str);
+    if (!Array.isArray(arrMentahInput)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/quicksort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/quicksort', { result });
+  }
+
   let arrMentah = quicksortFunc(arrMentahInput);
   result = '[' + arrMentah.join(',') + ']';
   return res.render('sort/quicksort', { result });
@@ -246,11 +309,21 @@ const heapsortProses = (req, res) => {
   const checkInput = Joi.object(checkObj).validate(req.body);
   if (checkInput.error) {
     req.flash('error', 'Input kosong');
-    return res.render('sort/shellsort', { result });
+    return res.render('sort/heapsort', { result });
   }
 
   const { str } = req.body;
-  let arrMentahInput = JSON.parse(str);
+  let arrMentahInput;
+  try {
+    arrMentahInput = JSON.parse(str);
+    if (!Array.isArray(arrMentahInput)) {
+      req.flash('error', 'Input salah');
+      return res.render('sort/heapsort', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    return res.render('sort/heapsort', { result });
+  }
 
   let initvar = parseInt(Math.floor((arrMentahInput.length - 1) / 2), 10);
   for (let i = initvar; i >= 0; i--) {

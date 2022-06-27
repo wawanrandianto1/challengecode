@@ -5,34 +5,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Run Length ENCODE</title>
+  <%- include('../partials/css'); -%>
 </head>
 <body>
-  <div>
-    <p>
-      contoh input: <b>aabbcd</b><br>
-      contoh output: <b>a2b2c1d1</b>
-    </p>
-    <p>
-      contoh input: <b>wwwbbbff</b>
+  
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
       <br>
-      contoh output: <b>w3b3f2</b>
-    </p>
-    
-    <%- include('../flashmessage'); -%>
-    
-    <form action="" method="post">
-      <input type="text" name="str" placeholder="masukkan input">
-      <button type="submit">Apply</button>
-    </form>
-    
-    <br>
-    <br>
-    <br>
-    <% if (result.length) { %>
-      <p>Hasil : <%= result %></p>
-    <% } %>
+      <pre class="code-example">
+        contoh input: aabbcd
+        contoh output: a2b2c1d1
+        
+        contoh input: wwwbbbff
+        contoh output: w3b3f2
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="masukkan input">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
       
-    
+      <% if (result.length) { %>
+        <pre>Hasil : <%= result %></pre>
+      <% } %>
+    </div>
   </div>
 </body>
 </html>
