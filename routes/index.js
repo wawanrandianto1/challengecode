@@ -14,6 +14,8 @@ router.post('/runlen-decode', FirstController.decodeProses);
 
 router.get('/eventproblem', SecondController.eventproblemPage);
 router.post('/eventproblem', SecondController.eventproblemProses);
+router.get('/smallestnumber', SecondController.smallestNumberPage);
+router.post('/smallestnumber', SecondController.smallestNumberProses);
 
 router.get('/bubblesort', SortController.bubblesortPage);
 router.post('/bubblesort', SortController.bubblesortProses);

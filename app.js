@@ -15,10 +15,11 @@ const logger = require('morgan');
 
 // ROUTES
 const routerApp = require('./routes/index');
+const { binaryGap } = require('./controller/SecondController');
 
 const port = process.env.PORT || 8081;
 let sess = {
-  secret: process.env.SECRET_KEY,
+  secret: process.env.SECRET_KEY || 'abcd4',
   resave: false,
   saveUninitialized: true,
   cookie: {},
@@ -68,3 +69,5 @@ server.listen(port, () => {
   // eslint-disable-next-line
   console.log(`Running and listening on PORT:${port}`);
 });
+
+binaryGap()
