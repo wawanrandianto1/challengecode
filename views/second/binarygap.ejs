@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BINARY GAP</title>
+  <%- include('../partials/css'); -%>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <pre class="code-example">
+        Tulis sebuah function untuk menentukan jarak 0 paling jauh dari sebuah binary pada array
+        contoh:
+        inputan = [529, 147, 1041];
+
+        - angka 529 = 1000010001
+          jarak 0 paling jauh = 4
+
+        - angka 147 = 10010011
+          jarak 0 paling jauh = 2
+
+        - angka 1041 = 10000010001
+          jarak 0 paling jauh = 5
+
+        maka hasilnya adalah 5
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="input array" value="[147,529,1041]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
+      
+      <% if (result) { %>
+        <pre>
+          Hasil adalah : <%= result %>
+        </pre>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

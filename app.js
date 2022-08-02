@@ -70,4 +70,4 @@ server.listen(port, () => {
   console.log(`Running and listening on PORT:${port}`);
 });
 
-binaryGap()
+// binaryGap()

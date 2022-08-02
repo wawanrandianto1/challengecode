@@ -16,6 +16,8 @@ router.get('/eventproblem', SecondController.eventproblemPage);
 router.post('/eventproblem', SecondController.eventproblemProses);
 router.get('/smallestnumber', SecondController.smallestNumberPage);
 router.post('/smallestnumber', SecondController.smallestNumberProses);
+router.get('/binary-gap', SecondController.binaryGapPage);
+router.post('/binary-gap', SecondController.binaryGapProses);
 
 router.get('/bubblesort', SortController.bubblesortPage);
 router.post('/bubblesort', SortController.bubblesortProses);

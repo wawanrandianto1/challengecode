@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const moment = require('moment');
-const { quicksortFunc } = require('./SortController.js');
 
 const eventproblemPage = (req, res) => {
   return res.render('second/main1', { result: '' });
@@ -140,70 +139,27 @@ const smallestNumberProses = (req, res) => {
   return res.render('second/smallest_number', { result });
 }
 
+// const regexBinaryGap = (inp) => {
+//   const reg = /0{1,}/gm
+//   let res = reg.exec(inp)
+//   let minues = 0
+//   while (res != null) {
+//     console.log(res[0])
+//     if(res[0].length > minues) minues = res[0].length
+//     res = reg.exec(inp)
+//   }
+//   return minues
+// }
+
 const dec2bin = (dec) => {
   return (dec >>> 0).toString(2);
 }
 
-const regexBinaryGap = (inp) => {
-  const reg = /0{1,}/gm
-  let res = reg.exec(inp)
-  let minues = 0
-  while (res != null) {
-    console.log(res[0])
-    if(res[0].length > minues) minues = res[0].length
-    res = reg.exec(inp)
-  }
-  return minues
-}
-
-const loopTestPerformance = () => {
-  let arrTemp = [];
-  for (let i = 0; i < 1000; i++) {
-    arrTemp.push('a');
-  }
-  
-  let count = 0;
-  let startTime = performance.now();
-  arrTemp.forEach(el => {
-    count++;
-  });
-  
-  console.log("forEach:", performance.now() - startTime)
-  count = 0;
-  startTime = performance.now();
-  for (const arr of arrTemp) {
-    count++;
-  }
-  
-  console.log("for OF:", performance.now() - startTime)
-  count = 0;
-  startTime = performance.now();
-  for (let i = 0; i < arrTemp.length; i++) {
-    count++;
-  }
-  console.log("for biasa:", performance.now() - startTime)
-};
-
-const binaryGap = (arr) => {
-  const tmp = [529,147,1,2, 1041]
+const binaryGap = (tmp) => {
+  // const tmp = [529,147,1,2,1041]
   let min = 0; // longest gap
-  let minRegex = 0;
-  let startTime = performance.now();
   for (let index = 0; index < tmp.length; index++) {
-    const element = tmp[index];
-    let tmpBin = dec2bin(element);
-    
-    // imam
-    let res = regexBinaryGap(tmpBin)
-    if(res > minRegex) minRegex = res
-  }
-  console.log("imam speed:", performance.now() - startTime)
-  startTime = performance.now()
-  for (let index = 0; index < tmp.length; index++) {
-    const element = tmp[index];
-    let tmpBin = dec2bin(element);
-    
-    // wawan
+    let tmpBin = dec2bin(tmp[index]);
     let tmpLong = 0;
     for (let idx = 0; idx < tmpBin.length; idx++) {
       let chara = tmpBin[idx];
@@ -217,14 +173,44 @@ const binaryGap = (arr) => {
       }
     }
   }
-  console.log("wawan speed:", performance.now() - startTime)
-  console.log("min", min)
-  console.log("minRegex", minRegex)
-  loopTestPerformance()
+  return min;
+}
+
+const binaryGapPage = (req, res) => {
+  return res.render('second/binarygap', { result: '' });
+};
+
+const binaryGapProses = (req, res) => {
+  let result = null;
+  const checkObj = { str: Joi.string().required() };
+  const checkInput = Joi.object(checkObj).validate(req.body);
+  if (checkInput.error) {
+    req.flash('error', 'Input kosong');
+    return res.render('second/binarygap', { result });
+  }
+
+  const { str } = req.body;
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'Input salah');
+      return res.render('second/binarygap', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    console.log(error)
+    return res.render('second/binarygap', { result });
+  }
+
+  result = binaryGap(arrMentah);
+  return res.render('second/binarygap', { result });
 }
 
 module.exports = {
   binaryGap,
+  binaryGapPage,
+  binaryGapProses,
   eventproblemPage,
   eventproblemProses,
   smallestNumberPage,
