@@ -4,6 +4,7 @@ const router = express.Router();
 // Require controller modules.
 const FirstController = require('../controller/FirstController');
 const SecondController = require('../controller/SecondController');
+const ThirdController = require('../controller/ThirdController');
 const SortController = require('../controller/SortController');
 
 router.get('/', FirstController.homePage);
@@ -18,6 +19,9 @@ router.get('/smallestnumber', SecondController.smallestNumberPage);
 router.post('/smallestnumber', SecondController.smallestNumberProses);
 router.get('/binary-gap', SecondController.binaryGapPage);
 router.post('/binary-gap', SecondController.binaryGapProses);
+
+router.get('/str-split', ThirdController.stringsplitPage);
+router.post('/str-split', ThirdController.stringsplitProses);
 
 router.get('/bubblesort', SortController.bubblesortPage);
 router.post('/bubblesort', SortController.bubblesortProses);
