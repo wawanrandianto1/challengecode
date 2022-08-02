@@ -15,7 +15,12 @@ const stringsplitProses = (req, res) => {
   }
 
   const { str, angka } = req.body;
-	let strPisah = str.substr(0, parseInt(angka));
+	let tmpAngka = str.length;
+	if (parseInt(angka, 10) <= tmpAngka) {
+		tmpAngka = parseInt(angka, 10);
+	}
+
+	let strPisah = str.substr(0, tmpAngka);
 	let arrStr = str.split(" ");
 	let arrStrPisah = strPisah.split(" ");
 
