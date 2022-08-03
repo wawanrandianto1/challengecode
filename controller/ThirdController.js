@@ -9,6 +9,10 @@ const bioskopcasePage = (req, res) => {
   return res.render('second/bioskopcase', { result: '' });
 };
 
+const polusiPage = (req, res) => {
+  return res.render('second/polusi', { result: '' });
+};
+
 // PROSES
 const stringsplitProses = (req, res) => {
   let result = null;
@@ -94,9 +98,59 @@ const bioskopcaseProses = (req, res) => {
   return res.render('second/bioskopcase', { result });
 };
 
+const polusiProses = (req, res) => {
+  let result = null;
+  const checkObj = {
+    str: Joi.string().required(),
+  };
+  const checkInput = Joi.object(checkObj).validate(req.body);
+  if (checkInput.error) {
+    req.flash('error', 'Input kosong');
+    return res.render('second/polusi', { result });
+  }
+
+  const { str } = req.body;
+  let arrMentah;
+  try {
+    arrMentah = JSON.parse(str);
+    if (!Array.isArray(arrMentah)) {
+      req.flash('error', 'In)put salah');
+      return res.render('second/polusi', { result });
+    }
+  } catch (error) {
+    req.flash('error', 'Input salah');
+    // console.log(error);
+    return res.render('second/polusi', { result });
+  }
+
+  let arr = arrMentah;
+  arr.sort((a, b) => a - b);
+  arr.reverse();
+  let maxPolusi = arr.reduce((prev, current ) => prev + current, 0);
+  let jumlahFilter = 0, 
+  tmpPolusi = maxPolusi, 
+  separoPolusi = parseFloat(maxPolusi / 2);
+
+  while (tmpPolusi > separoPolusi) {
+    tmpSeparo = parseFloat(arr[0] / 2);
+    arr[0] = tmpSeparo;
+    if (arr.length > 1 && arr[1] > tmpSeparo) {
+      arr.sort((a, b) => a - b);
+      arr.reverse();
+    }
+    tmpPolusi = arr.reduce((prev, current ) => prev + current, 0);
+    jumlahFilter += 1;
+  }
+  
+  result = jumlahFilter + '';
+  return res.render('second/polusi', { result });
+};
+
 module.exports = {
   stringsplitPage,
   stringsplitProses,
   bioskopcasePage,
   bioskopcaseProses,
+  polusiPage,
+  polusiProses,
 };

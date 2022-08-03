@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polusi</title>
+  <%- include('../partials/css'); -%>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <pre class="code-example">
+        sebuah pabrik plastik menghasilkan polusi ketika membuat sendal.mereka memasang filter untuk mengurangi polusi, 
+        ketika pabrik A menghasilkan 7 polusi akan berkurang menjadi 3.5 ketika dipasangi 1 fiter, 1.75 polusi ketika 2 filter dan 0.875 ketika 3 filter.
+        tujuan dari pabrik A adalah untuk mengurangi polusi separo dari polusi yang dihasilkan.
+        
+        contoh:
+        P = [5,19,8,1], maka output = 3
+        total polusi adalah 33, separo dari polusi = 16.5 
+        maka 5+((19/2)/2)+(8/2)+1 = 5+4.75+4+1 = 14.75 (lebih kecil dari separo)
+        total filter yang dipasang adalah 3
+
+        P = [20,20], maka output = 2
+        setiap filter dipasang pada polusi (20/2)+(20/2) = 10+10 = 20 (separo dari polusi)
+
+        P = [3,0,5], maka output = 2
+        filter dipasang pada (3/2)+0+(5/2) = 1.5+0+2.5 = 4 (separo dari polusi)
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        <input type="text" name="str" placeholder="input kalimat" value="[5,19,8,1]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
+      
+      <% if (result) { %>
+        <pre>
+          Hasil adalah : <%= result %>
+        </pre>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
