@@ -71,3 +71,45 @@ server.listen(port, () => {
 });
 
 // binaryGap()
+
+// const printSegitiga = (num) => {
+//   for (let i = 0; i < num; i++) {
+//     let str = '';
+
+//     // first [CARA PERTAMA]
+//     // let count = num - (num - 1 - i);
+//     // let adding = '*'.repeat(count);
+//     // str += adding;
+//     // str += '\n';
+
+//     // second [CARA KEDUA]
+//     let count = num - (num - 1 - i);
+//     let adding = new Array(count + 1).join('*');
+//     str += adding;
+//     str += '\n';
+
+//     // third [CARA KETIGA]
+//     // for (let j = 0; j < i+1; j++) {
+//     //   str += '*';
+//     // }
+//     // str += '\n';
+//     console.log(str);
+//   }
+// };
+// printSegitiga(5);
+
+// const printKotak = (num) => {
+//   let length = num - 1;
+//   for (let i = 0; i <= length; i++) {
+//     let str = '';
+//     for (let j = 0; j <= length; j++) {
+//       if (i == 0 || j == 0 || i == length || j == length) {
+//         str += '*';
+//       } else {
+//         str += ' ';
+//       }
+//     }
+//     console.log(str);
+//   }
+// };
+// printKotak(4);

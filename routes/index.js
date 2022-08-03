@@ -22,6 +22,8 @@ router.post('/binary-gap', SecondController.binaryGapProses);
 
 router.get('/str-split', ThirdController.stringsplitPage);
 router.post('/str-split', ThirdController.stringsplitProses);
+router.get('/bioskop-case', ThirdController.bioskopcasePage);
+router.post('/bioskop-case', ThirdController.bioskopcaseProses);
 
 router.get('/bubblesort', SortController.bubblesortPage);
 router.post('/bubblesort', SortController.bubblesortProses);

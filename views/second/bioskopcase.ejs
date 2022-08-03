@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CINEMA XXI</title>
+  <%- include('../partials/css'); -%>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <pre class="code-example">
+        ketika jomblo, kita ajak pacar ke bioskop pastinya XXI.
+        ketika memesan tiket kita juga akan memesan tempat duduk.
+        input adalah 2 buah array, dengan ketentuan 1 array adalah orang (O) dan 1 array adalah kursi (K) pada bioskop XXI
+        
+        contoh:
+        1.  O = [1,2,1] berjumlah total 4 orang
+            K = [2,3,2] berjumlah total 7 kursi
+            output yang dihasilkan = 2 Baris Kursi yang terisi oleh Orang
+            (kursi pada baris pertama berisi 2 orang, dan baris kedua berisi 3 orang sehingga kursi baris ke 3 kosong)
+          
+        2.  O = [3,5,1] berjumlah total 8 orang
+            K = [2,7,3] berjumlah total 12 kursi
+            output yang dihasilkan = 2 Baris Kursi yang terisi oleh Orang
+          
+        3.  O = [3,5,1] berjumlah total 8 orang
+            K = [9,2,2] berjumlah total 13 kursi
+            output yang dihasilkan = 1 Baris Kursi yang terisi oleh Orang
+            
+        4.  O = [2,2,1] berjumlah total 5 orang
+            K = [1,2,2] berjumlah total 5 kursi
+            output yang dihasilkan = 3 Baris Kursi yang terisi oleh Orang
+            
+          note: **input Kursi wajib lebih banyak daripada Orang
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        O = <input type="text" name="orang" placeholder="input Orang" value="[3,5,1]">
+        P = <input type="text" name="kursi" placeholder="input Kursi" value="[2,7,3]">
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
+      
+      <% if (result) { %>
+        <pre>
+          Hasil adalah : <%= result %> Baris Kursi
+        </pre>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
