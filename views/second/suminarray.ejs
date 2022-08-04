@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUM IN ARRAY</title>
+  <%- include('../partials/css'); -%>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a class="button" href="/"> < Back to Home</a>
+      <br>
+      <pre class="code-example">
+        Terdapat sebuah array seperti: [7, 3, 5, 2, -4, 8, 11]
+        Ambil index 0 dan cari penjumlahan dari index 0 tersebut, 
+        hasilkan output string dengan comma untuk masing2 penjumlahannya.
+        
+        untuk hasil dari penjumlahan angka 7 yaitu [5, 2] and [-4, 11]
+        maka outputnya adalah 5,2 -4,11
+        
+        **jika tidak terdapat penjumlahan pada array sisanya, return -1
+        
+        contoh lainnya:
+        Input 2: [17, 4, 5, 6, 10, 11, 4, -3, -5, 3, 15, 2, 7]
+        Output 2: 6,11 10,7 15,2
+        
+        Input 3: [7, 6, 4, 1, 7, -2, 3, 12]
+        Output 3: 6,1 4,3
+      </pre>
+      <br>
+      <%- include('../flashmessage'); -%>
+      <form action="" method="post">
+        Input : 
+        <select name="angka">
+          <option value="1" selected>[7, 3, 5, 2, -4, 8, 11]</option>
+          <option value="2" selected>[17, 4, 5, 6, 10, 11, 4, -3, -5, 3, 15, 2, 7]</option>
+          <option value="3" selected>[7, 6, 4, 1, 7, -2, 3, 12]</option>
+        </select>
+        <button class="button-primary" type="submit">Apply</button>
+      </form>
+      
+      <% if (result) { %>
+        <pre>
+          Hasil adalah : <%= result %>
+        </pre>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

@@ -13,6 +13,10 @@ const polusiPage = (req, res) => {
   return res.render('second/polusi', { result: '' });
 };
 
+const suminarrayPage = (req, res) => {
+  return res.render('second/suminarray', { result: '' });
+};
+
 // PROSES
 const stringsplitProses = (req, res) => {
   let result = null;
@@ -126,10 +130,10 @@ const polusiProses = (req, res) => {
   let arr = arrMentah;
   arr.sort((a, b) => a - b);
   arr.reverse();
-  let maxPolusi = arr.reduce((prev, current ) => prev + current, 0);
-  let jumlahFilter = 0, 
-  tmpPolusi = maxPolusi, 
-  separoPolusi = parseFloat(maxPolusi / 2);
+  let maxPolusi = arr.reduce((prev, current) => prev + current, 0);
+  let jumlahFilter = 0,
+    tmpPolusi = maxPolusi,
+    separoPolusi = parseFloat(maxPolusi / 2);
 
   while (tmpPolusi > separoPolusi) {
     tmpSeparo = parseFloat(arr[0] / 2);
@@ -138,12 +142,66 @@ const polusiProses = (req, res) => {
       arr.sort((a, b) => a - b);
       arr.reverse();
     }
-    tmpPolusi = arr.reduce((prev, current ) => prev + current, 0);
+    tmpPolusi = arr.reduce((prev, current) => prev + current, 0);
     jumlahFilter += 1;
   }
-  
+
   result = jumlahFilter + '';
   return res.render('second/polusi', { result });
+};
+
+const suminarrayProses = (req, res) => {
+  let result = null;
+  const checkObj = {
+    angka: Joi.number().required(),
+  };
+  const checkInput = Joi.object(checkObj).validate(req.body);
+  if (checkInput.error) {
+    req.flash('error', 'Input kosong');
+    return res.render('second/suminarray', { result });
+  }
+
+  const { angka } = req.body;
+  let tmpArr = [7, 3, 5, 2, -4, 8, 11];
+  if (angka == '2') {
+    tmpArr = [17, 4, 5, 6, 10, 11, 4, -3, -5, 3, 15, 2, 7];
+  } else if (angka == '3') {
+    tmpArr = [7, 6, 4, 1, 7, -2, 3, 12];
+  }
+
+  let tmpRes = [];
+  let cariAngka = tmpArr.shift();
+  for (let i = 0; i < tmpArr.length - 1; i++) {
+    let firstAngka = tmpArr[i];
+    for (let j = 0; j < tmpArr.length; j++) {
+      let secondAngka = tmpArr[j];
+      if (i != j) {
+        if (firstAngka + secondAngka == cariAngka) {
+          let insert = true;
+          if (tmpRes.length > 0) {
+            const filRes = tmpRes.filter((el) => el.indexing.indexOf(i) > -1 && el.indexing.indexOf(j) > -1);
+            if (filRes.length) {
+              insert = false;
+            }
+          }
+
+          if (insert) {
+            tmpRes.push({
+              result: [firstAngka, secondAngka],
+              indexing: [i, j],
+            });
+          }
+        }
+      }
+    }
+  }
+
+  let tmpResStr = '';
+  tmpRes.forEach((el) => {
+    tmpResStr += el.result.join(',') + ' ';
+  });
+  result = tmpResStr.trim();
+  return res.render('second/suminarray', { result });
 };
 
 module.exports = {
@@ -153,4 +211,6 @@ module.exports = {
   bioskopcaseProses,
   polusiPage,
   polusiProses,
+  suminarrayPage,
+  suminarrayProses,
 };
