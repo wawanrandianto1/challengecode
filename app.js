@@ -16,6 +16,7 @@ const logger = require('morgan');
 // ROUTES
 const routerApp = require('./routes/index');
 const { binaryGap } = require('./controller/SecondController');
+const { validSudoku } = require('./controller/FourthController');
 
 const port = process.env.PORT || 8081;
 let sess = {
@@ -65,11 +66,35 @@ app.use((req, res, next) => {
 app.use('/', routerApp);
 
 // app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/main.html')));
-server.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Running and listening on PORT:${port}`);
-});
+// server.listen(port, () => {
+//   console.log(`Running and listening on PORT:${port}`);
+// });
 
+
+// let board = [
+//   [2,4,6,7,9,2,3,8,5],
+//   [2,5,8,3,4,6,7,9,1],
+//   [3,7,9,5,8,1,4,6,2],
+//   [4,3,7,9,1,5,8,2,6],
+//   [5,8,1,6,2,7,9,3,4],
+//   [6,9,2,4,3,8,1,5,7],
+//   [7,1,3,2,6,9,5,4,8],
+//   [8,2,4,1,5,3,6,7,9],
+//   [9,6,5,8,7,4,2,1,3],
+// ];
+let board = [
+  [1,4,6,7,9,2,3,8,5],
+  [2,5,8,3,4,6,7,9,1],
+  [3,7,9,5,8,1,4,6,2],
+  [4,3,7,9,1,5,8,2,6],
+  [5,8,1,6,2,7,9,3,4],
+  [6,9,2,4,3,8,1,5,7],
+  [7,1,3,2,6,9,5,4,8],
+  [8,2,4,1,5,3,6,7,9],
+  [9,6,5,8,7,4,2,1,3],
+];
+
+console.log(validSudoku(board));
 // binaryGap()
 
 // const printSegitiga = (num) => {
